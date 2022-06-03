@@ -1,0 +1,10 @@
+Architecture: all
+Description: static C++ library for solver
+ Solves quadratic equations, yo
+Maintainer: sodium.acetate.82@gmail.com
+Package: solverapp
+Priority: optional
+Section: devel
+Version: 0.1.1
+Installed-Size: 39
+
