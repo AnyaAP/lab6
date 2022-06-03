@@ -1,6 +1,35 @@
 ## Laboratory work VI
 
-Данная лабораторная работа посвещена изучению средств пакетирования на примере **CPack**
+# Как конфигурировать CPack?
+```
+include(CPackComponent)
+
+cpack_add_component(runtime)
+cpack_add_component(devel DEPENDS runtime)
+cpack_add_component(sample DEPENDS runtime devel)
+
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY 0)
+set(CPACK_PACKAGE_CONTACT "info@example.com")
+
+set(CPACK_ARCHIVE_COMPONENT_INSTALL On)
+
+set(CPACK_RPM_COMPONENT_INSTALL On)
+set(CPACK_RPM_PACKAGE_AUTOREQ On)
+set(CPACK_RPM_PACKAGE_AUTOREQPROV Off)
+set(CPACK_RPM_DEVEL_PACKAGE_REQUIRES "blas, lapack, atlas, jsoncpp-devel")
+set(CPACK_RPM_SAMPLE_PACKAGE_REQUIRES "ffmpeg-devel, jsoncpp-devel")
+
+set(CPACK_DEB_COMPONENT_INSTALL On)
+set(CPACK_DEBIAN_DEVEL_PACKAGE_DEPENDS "libopenblas-base, libblas3, libjsoncpp-dev, libjsoncpp1, libopenblas-dev")
+set(CPACK_DEBIAN_SAMPLE_PACKAGE_DEPENDS "libavformat-dev, libavcodec-dev, libswscale-dev, libswresample-dev, libavutil-dev, libopenblas-dev")
+
+include(CPack)
+```
+Подключив требуемые модули расширяющие CPack, необходимо выставить значения задокументированных переменных для каждого конкретного формата установщика или пакета. Некоторые значения берутся из переменных и параметров CMake, некоторые могут быть заполнены автоматически при выполнение упаковки. После выставления переменных следует подключить собственно модуль CPack через include(CPack). 
+
+
+
+# Данная лабораторная работа посвещена изучению средств пакетирования на примере **CPack**
 
 ```sh
 $ open https://cmake.org/Wiki/CMake:CPackPackageGenerators
